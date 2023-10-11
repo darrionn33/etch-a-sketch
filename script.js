@@ -1,5 +1,5 @@
 const gridInput = document.querySelector("#gridInput");
-const showGrid = document.querySelector("button");
+const resetGrid = document.querySelector("button");
 const h2 = document.querySelector("h2");
 let gridSize = 16;
 h2.textContent = gridInput.value + ` x ${gridInput.value}`;
@@ -33,7 +33,7 @@ gridInput.addEventListener("input", (e) => {
     for (let i = 1; i <= gridSize; i++) {
       const div2 = document.createElement("div");
       div2.classList.add("grid");
-      div2.style.outline = "1px solid black";
+      // div2.style.outline = "1px solid lightgray";
       div2.style.width = 300 / gridSize + "px";
       div2.style.height = 300 / gridSize + "px";
       div.append(div2);
@@ -44,10 +44,10 @@ gridInput.addEventListener("input", (e) => {
     boardContainer.append(div);
   }
 });
-showGrid.addEventListener("click", () => {
-  const gridItems = document.querySelectorAll(".grid");
 
+resetGrid.addEventListener("click", () => {
+  const gridItems = document.querySelectorAll(".grid");
   for (let i = 0; i < gridItems.length; i++) {
-    gridItems[i].classList.toggle("lines");
+    gridItems[i].style.backgroundColor = "#98bad5";
   }
 });

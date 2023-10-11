@@ -17,9 +17,40 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: plum;
+}
+.body {
+  outline: 3px solid;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.body > h1 {
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 30px;
 }
 #gridInput {
   width: 300px;
+  accent-color: slateblue;
+}
+#colorInput {
+  margin-bottom: 10px;
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+}
+button {
+  margin-bottom: 10px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: slateblue;
+  color: #fff;
+}
+#color {
+  margin-top: 10px;
 }
 .board-container {
   overflow: hidden;
@@ -35,8 +66,8 @@ body {
 .grid {
   width: calc(300px / 16);
   height: calc(300px / 16);
-  background-color: slateblue;
+  background-color: #98bad5;
+  outline: 1px solid gray;
 }
 .lines {
-  outline: 1px solid;
 }

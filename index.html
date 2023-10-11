@@ -4,17 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-A-Sketch!</title>
+    <meta name="description" content="An etch-a-sketch made with JS!" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <h3>COLOR</h3>
-    <input id="colorInput" type="color" value="#800080" />
-    <h3>GRID LINES</h3>
-    <button>SHOW</button>
-    <h3>GRID SIZE</h3>
-    <h2>? x ?</h2>
-    <input id="gridInput" type="range" min="1" max="64" value="16" />
-    <div class="board-container"></div>
+    <div class="body">
+      <h1>Etch-A-Sketch</h1>
+      <!-- <h3>GRID LINES</h3>
+      <button>SHOW</button> -->
+      <h3>GRID SIZE</h3>
+      <h2>? x ?</h2>
+      <input id="gridInput" type="range" min="1" max="32" value="16" />
+      <h3 id="color">COLOR</h3>
+      <input id="colorInput" type="color" value="#ffffff" />
+      <button>RESET</button>
+      <div class="board-container"></div>
+    </div>
   </body>
 </html>
