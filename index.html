@@ -9,17 +9,15 @@
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <div class="body">
+    <main>
       <h1>Etch-A-Sketch</h1>
-      <!-- <h3>GRID LINES</h3>
-      <button>SHOW</button> -->
-      <h3>GRID SIZE</h3>
-      <h2>? x ?</h2>
-      <input id="gridInput" type="range" min="1" max="32" value="16" />
-      <h3 id="color">COLOR</h3>
-      <input id="colorInput" type="color" value="#ffffff" />
-      <button>RESET</button>
+      <h2>GRID SIZE</h2>
+      <h3 class="grid-size-display"></h3>
+      <input class="grid-input" type="range" min="1" max="32" value="16" />
+      <h2>COLOR</h2>
+      <input class="color-input" type="color" value="#ffffff" />
+      <button class="reset-button">RESET</button>
       <div class="board-container"></div>
     </div>
-  </body>
+  </main>
 </html>

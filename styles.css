@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
 }
+
 *,
 *::after,
 *::before {
@@ -9,17 +10,16 @@ html {
   padding: 0;
   margin: 0;
 }
+
 body {
-  overflow: hidden;
   width: 100dvw;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   background-color: plum;
 }
-.body {
+
+main {
   outline: 3px solid;
   background-color: #fff;
   border-radius: 10px;
@@ -27,33 +27,38 @@ body {
   display: flex;
   flex-direction: column;
 }
-.body > h1 {
+
+main > h1 {
   text-align: center;
   text-decoration: underline;
   margin-bottom: 30px;
 }
-#gridInput {
+
+.grid-input,
+.color-input,
+button {
+  margin-bottom: 10px;
+}
+
+.grid-input {
   width: 300px;
   accent-color: slateblue;
 }
-#colorInput {
-  margin-bottom: 10px;
+
+.color-input {
   background-color: transparent;
   height: 50px;
   width: 50px;
 }
-button {
-  margin-bottom: 10px;
+
+.reset-button {
   height: 30px;
   border-radius: 5px;
   background-color: slateblue;
   color: #fff;
 }
-#color {
-  margin-top: 10px;
-}
+
 .board-container {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,13 +66,9 @@ button {
   width: 300px;
   height: 300px;
   border: 1px solid black;
-  /* overflow: hidden; */
 }
-.grid {
-  width: calc(300px / 16);
-  height: calc(300px / 16);
+
+.grid-items {
   background-color: #98bad5;
   outline: 1px solid gray;
-}
-.lines {
 }
