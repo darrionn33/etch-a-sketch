@@ -41,7 +41,7 @@ button {
 }
 
 .grid-input {
-  width: 300px;
+  max-width: 300px;
   accent-color: slateblue;
 }
 
@@ -63,9 +63,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 300px;
+  width: 40dvw;
+  height: 40dvw;
   border: 1px solid black;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .grid-items {

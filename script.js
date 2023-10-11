@@ -1,8 +1,8 @@
-const gridInput = document.querySelector(".grid-input");
-const resetGridButton = document.querySelector(".reset-button");
 const boardContainer = document.querySelector(".board-container");
+const gridInput = document.querySelector(".grid-input");
 const gridSizeDisplay = document.querySelector(".grid-size-display");
 const colorInput = document.querySelector(".color-input");
+const resetGridButton = document.querySelector(".reset-grid-button");
 
 gridSizeDisplay.textContent = gridInput.value + ` x ${gridInput.value}`;
 
@@ -14,8 +14,8 @@ const createGrid = (gridSize) => {
     for (let i = 0; i < gridSize; i++) {
       const div2 = document.createElement("div");
       div2.classList.add("grid-items");
-      div2.style.width = 300 / gridSize + "px";
-      div2.style.height = 300 / gridSize + "px";
+      div2.style.width = boardContainer.offsetWidth / gridSize + "px";
+      div2.style.height = boardContainer.offsetWidth / gridSize + "px";
       div.append(div2);
       div2.addEventListener("click", () => {
         div2.style.backgroundColor = colorInput.value;
