@@ -10,23 +10,33 @@ html {
   margin: 0;
 }
 body {
+  overflow: hidden;
   width: 100dvw;
   height: 100dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+#gridInput {
+  width: 300px;
+}
 .board-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 300px;
   height: 300px;
-  border: 5px solid black;
-  overflow: hidden;
+  border: 1px solid black;
+  /* overflow: hidden; */
 }
-.grid-off {
-  width: 20px;
-  height: 20px;
+.grid {
+  width: calc(300px / 16);
+  height: calc(300px / 16);
   background-color: slateblue;
 }
-.grid-on {
-  background-color: purple;
+.lines {
+  outline: 1px solid;
 }
