@@ -29,7 +29,6 @@ createGrid(gridInput.value);
 
 gridInput.addEventListener("input", () => {
   gridSizeDisplay.textContent = gridInput.value + ` x ${gridInput.value}`;
-  gridSize = gridInput.value;
   boardContainer.replaceChildren();
   createGrid(gridInput.value);
 });
