@@ -12,6 +12,6 @@ An etch-a-sketch made with JS!
 1. Make the site look good on Desktop.
 2. Toggle between paint/erase mode.
 3. Toggle between mouse hover/click mode.
-4. Toggle grid lines on/off.
+4. ~~Toggle grid lines on/off.~~
 5. Enter a custom grid size.
-6. Change background colour.
+6. ~~Change background colour.~~
