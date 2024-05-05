@@ -1,122 +1,130 @@
-const [
-  boardContainer,
-  gridInput,
-  gridSizeDisplay,
-  penColorInput,
-  gridColorInput,
-  resetGridButton,
-  gridLineButton,
-] = [
-  $(".board-container"),
-  $(".grid-input"),
-  $(".grid-size-display"),
-  $(".pen-color-input"),
-  $(".grid-color-input"),
-  $(".reset-grid-button"),
-  $(".grid-line-button"),
-];
+function getContrast50(hexcolor) {
+  return parseInt(hexcolor, 16) > 0xffffff / 2 ? "black" : "white";
+}
 
-const setGridSizeDisplay = () => {
-  gridSizeDisplay.text(`${gridInput.val()} X ${gridInput.val()}`);
-};
-setGridSizeDisplay();
-
-const createGrid = (gridSize) => {
-  boardContainer.children().not(".overlay").remove();
-  const itemSize = boardContainer.width() / gridSize + "px";
-  const itemColor = gridColorInput.val();
-  for (let i = 0; i < gridSize; i++) {
-    boardContainer.append("<div></div>").children().css("display", "flex");
-
-    for (let j = 0; j < gridSize; j++) {
-      boardContainer
-        .children()
-        .eq(i + 1)
-        .append("<div></div>");
-      boardContainer
-        .children()
-        .children()
-        .css({
-          "background-color": itemColor,
-          height: itemSize,
-          width: itemSize,
-        })
-        .addClass("grid-items")
-        .off()
-        .on("mouseover", (e) => {
-          e.target.style.backgroundColor = penColorInput.val();
-        });
+function createGrid(size) {
+  const outlineColor = getContrast50($("#grid-color").val().split("#")[1]);
+  $(".container").children().not(".overlay").remove();
+  let i = 0;
+  let columns = "";
+  while (i < size * size) {
+    if (i < size) {
+      columns = columns + "1fr ";
     }
+    $(".container").append("<div></div)");
+    i++;
   }
-};
-createGrid(gridInput.val());
+  $(".container")
+    .css("grid-template-columns", columns)
+    .children()
+    .not(".overlay")
+    .addClass("grid-item")
+    .css({
+      "background-color": $("#grid-color").val(),
+      "outline-color": outlineColor,
+    })
+    .off()
+    .on("mouseover", (e) => {
+      e.target.style.backgroundColor = $("#pen-color").val();
+    });
+}
+createGrid(16);
 
-gridInput.on("input", () => {
-  setGridSizeDisplay();
-  createGrid(gridInput.val());
+$(".colors")
+  .children()
+  .not(":last")
+  .click((e) => {
+    e.preventDefault();
+    $("#pen-color").val(e.target.value);
+  });
+
+let oldColor = $("#pen-color").val();
+$("#pen-color").on("change", () => {
+  oldColor = $("#pen-color").val();
+});
+$("#erase").click(() => {
+  oldColor = $("#pen-color").val();
+  $("#pen-color").val($("#grid-color").val());
+  $(".selected").css("left", "50%");
+});
+$("#paint").click(() => {
+  $("#pen-color").val(oldColor);
+  $(".selected").css("left", "0%");
 });
 
-const resetGrid = () => {
-  $(".grid-items").css("background-color", gridColorInput.val());
-};
-
-resetGridButton.click(() => {
-  resetGrid();
-});
-
-gridColorInput.on("change", () => {
-  resetGrid();
+$("#grid-color").on("change", () => {
+  createGrid($("#grid-size-input").val());
 });
 
 let gridLines = false;
-
-const setGridLines = (value) => {
-  $(".grid-items").css("outline-style", value);
-};
-
-gridLineButton.click(() => {
+$("#lines").click(() => {
   if (gridLines) {
-    setGridLines("none");
+    $(".container").children().not(".overlay").css("outline-style", "none");
+    $("#lines")
+      .text("Lines: OFF")
+      .css({ "background-color": "transparent", color: "black" });
   } else {
-    setGridLines("solid");
+    $(".container").children().not(".overlay").css("outline-style", "solid");
+    $("#lines")
+      .text("Lines:  ON")
+      .css({ "background-color": "black", color: "white" });
   }
   gridLines = !gridLines;
 });
 
+$("#reset").click(() => {
+  createGrid($("#grid-size-input").val());
+});
+
+let showGridSizeDiv = false;
+$("#grid-size-display").click(() => {
+  if (showGridSizeDiv) {
+    $(".grid-size-div").css("display", "none");
+    $("#grid-size-display").css("outline", "none");
+  } else {
+    $(".grid-size-div").css("display", "flex");
+    $("#grid-size-display").css("outline", "3px solid #d062ec");
+  }
+  showGridSizeDiv = !showGridSizeDiv;
+});
+
+$("#grid-size-range").on("input", () => {
+  const value = $("#grid-size-range").val();
+  $("#grid-size-input").val(value);
+  $("#grid-size-span").text(value);
+  $("#grid-size-display").text(value);
+  createGrid(value);
+});
+$("#grid-size-input").on("input", () => {
+  const value =
+    $("#grid-size-input").val() !== "" ? $("#grid-size-input").val() : 1;
+  $("#grid-size-range").val(value);
+  $("#grid-size-span").text(value);
+  $("#grid-size-display").text(value);
+  createGrid(value);
+});
+
 $(document).on({
-  touchmove: (e) => {
-    const element = document.elementFromPoint(
-      e.touches[0].clientX,
-      e.touches[0].clientY
-    );
-    $(element)
-      .filter(".grid-items")
-      .css("backgroundColor", penColorInput.val());
-  },
-  touchstart: () => {
+  mousedown: () => {
     $(".overlay").css("display", "none");
   },
-  mousedown: () => {
+  mouseup: () => {
+    $(".overlay").css("display", "block");
+  },
+  touchstart: () => {
     $(".overlay").css("display", "none");
   },
   touchend: () => {
     $(".overlay").css("display", "block");
   },
-  mouseup: () => {
-    $(".overlay").css("display", "block");
+  touchmove: (e) => {
+    e.preventDefault();
+    const element = document.elementFromPoint(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+    $(element)
+      .filter(".grid-item")
+      .css("background-color", $("#pen-color").val());
   },
-});
-
-let oldColor;
-$(".erase").click(() => {
-  $(".erase").addClass("selected");
-  $(".paint").removeClass("selected");
-  oldColor = penColorInput.val();
-  penColorInput.val(gridColorInput.val());
-});
-
-$(".paint").click(() => {
-  $(".paint").addClass("selected");
-  $(".erase").removeClass("selected");
-  penColorInput.val(oldColor);
 });
