@@ -22,14 +22,17 @@ const setGridSizeDisplay = () => {
 setGridSizeDisplay();
 
 const createGrid = (gridSize) => {
-  boardContainer.empty();
+  boardContainer.children().not(".overlay").remove();
   const itemSize = boardContainer.width() / gridSize + "px";
   const itemColor = gridColorInput.val();
   for (let i = 0; i < gridSize; i++) {
     boardContainer.append("<div></div>").children().css("display", "flex");
 
     for (let j = 0; j < gridSize; j++) {
-      boardContainer.children().eq(i).append("<div></div>");
+      boardContainer
+        .children()
+        .eq(i + 1)
+        .append("<div></div>");
       boardContainer
         .children()
         .children()
@@ -40,7 +43,7 @@ const createGrid = (gridSize) => {
         })
         .addClass("grid-items")
         .off()
-        .on("click", (e) => {
+        .on("mouseover", (e) => {
           e.target.style.backgroundColor = penColorInput.val();
         });
     }
@@ -78,4 +81,42 @@ gridLineButton.click(() => {
     setGridLines("solid");
   }
   gridLines = !gridLines;
+});
+
+$(document).on({
+  touchmove: (e) => {
+    const element = document.elementFromPoint(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+    $(element)
+      .filter(".grid-items")
+      .css("backgroundColor", penColorInput.val());
+  },
+  touchstart: () => {
+    $(".overlay").css("display", "none");
+  },
+  mousedown: () => {
+    $(".overlay").css("display", "none");
+  },
+  touchend: () => {
+    $(".overlay").css("display", "block");
+  },
+  mouseup: () => {
+    $(".overlay").css("display", "block");
+  },
+});
+
+let oldColor;
+$(".erase").click(() => {
+  $(".erase").addClass("selected");
+  $(".paint").removeClass("selected");
+  oldColor = penColorInput.val();
+  penColorInput.val(gridColorInput.val());
+});
+
+$(".paint").click(() => {
+  $(".paint").addClass("selected");
+  $(".erase").removeClass("selected");
+  penColorInput.val(oldColor);
 });
