@@ -1,17 +1,22 @@
 # Etch-A-Sketch
 
+![](./screenshots/etch-a-sketch.png)
+![](./screenshots/etch-a-sketch-mobile.png)
+
 An etch-a-sketch made with JS!
 
 ## Features
 
-1. Customizable grid size. ( 1x1 to 32x32 )
-2. You can choose color to paint with.
+1. Responsive.
+2. Toggle between paint/erase mode.
+3. Change pen/grid colour.
+4. Customizable grid size.
+5. Toggle grid lines on/off.
 
-## Future features
+## Tools used
 
-1. ~~Make the site look good on Desktop.~~
-2. ~~Toggle between paint/erase mode.~~
-3. ~~Toggle between mouse hover/click mode.(cancelled)~~
-4. ~~Toggle grid lines on/off.~~
-5. ~~Enter a custom grid size.~~
-6. ~~Change background colour.~~
+- jQuery
+
+## Todo
+
+1. Clean up code.

@@ -79,15 +79,15 @@ h1 {
   .colors input:nth-child(2),
   .colors input:nth-child(4),
   .colors input:nth-child(6),
-  .colors input:nth-child(7) {
+  .colors input:nth-child(8) {
     justify-self: end;
   }
-  .colors input:nth-last-child(2) {
+  .colors input:nth-last-child(1) {
     grid-column: 2/3;
     margin-top: 10px;
     position: relative;
   }
-  .colors input:nth-last-child(2)::before {
+  .colors input:nth-last-child(1)::before {
     content: "Pen Color";
     text-align: center;
     position: absolute;
@@ -111,14 +111,14 @@ h1 {
     height: 100%;
   }
   .mode button:nth-child(1) {
-    background: url(./pencil.png);
+    background: url(./assets/pencil.png);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: 50%;
     border-right: 1px solid black;
   }
   .mode button:nth-child(2) {
-    background: url(./erase.png);
+    background: url(./assets/erase.png);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -213,9 +213,7 @@ h1 {
   .grid-size-div input[type="number"] {
     border-bottom: 1px solid;
     text-align: center;
-  }
-  .grid-size-div input[type="number"] {
-    width: 30px;
+    width: 50px;
     background-color: transparent;
     font-size: medium;
   }
@@ -328,14 +326,14 @@ h1 {
     border: none;
   }
   .mode button:nth-child(1) {
-    background: url(./pencil.png);
+    background: url(./assets/pencil.png);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: 50%;
     border-right: 1px solid black;
   }
   .mode button:nth-child(2) {
-    background: url(./erase.png);
+    background: url(./assets/erase.png);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -393,7 +391,7 @@ h1 {
     width: 110%;
     height: 110%;
     background-color: #d062ec;
-    background: url(./grid.png);
+    background: url(./assets/grid.png);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -402,7 +400,7 @@ h1 {
     grid-column: 4/5;
     border: 1px solid black;
     color: transparent;
-    background: url(./reset.png);
+    background: url(./assets/reset.png);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: 50%;
