@@ -2,6 +2,26 @@ function getContrast50(hexcolor) {
   return parseInt(hexcolor, 16) > 0xffffff / 2 ? "black" : "white";
 }
 
+let gridLines = false;
+$("#lines").click(() => {
+  if (gridLines) {
+    $(".container").children().not(".overlay").css("outline-style", "none");
+    $("#lines")
+      .children(":first")
+      .text("Lines: OFF")
+      .css({ "background-color": "transparent", color: "black" });
+    $("#lines").children("div:nth-child(2)").css("display", "none");
+  } else {
+    $(".container").children().not(".overlay").css("outline-style", "solid");
+    $("#lines")
+      .children(":first")
+      .text("Lines:  ON")
+      .css({ "background-color": "black", color: "white" });
+    $("#lines").children("div:nth-child(2)").css("display", "block");
+  }
+  gridLines = !gridLines;
+});
+
 function createGrid(size) {
   const outlineColor = getContrast50($("#grid-color").val().split("#")[1]);
   $(".container").children().not(".overlay").remove();
@@ -27,6 +47,9 @@ function createGrid(size) {
     .on("mouseover", (e) => {
       e.target.style.backgroundColor = $("#pen-color").val();
     });
+  if (gridLines) {
+    $(".grid-item").css("outline-style", "solid");
+  }
 }
 createGrid(16);
 
@@ -41,6 +64,7 @@ $(".colors")
 let oldColor = $("#pen-color").val();
 $("#pen-color").on("change", () => {
   oldColor = $("#pen-color").val();
+  console.log(1);
 });
 $("#erase").click(() => {
   oldColor = $("#pen-color").val();
@@ -54,22 +78,6 @@ $("#paint").click(() => {
 
 $("#grid-color").on("change", () => {
   createGrid($("#grid-size-input").val());
-});
-
-let gridLines = false;
-$("#lines").click(() => {
-  if (gridLines) {
-    $(".container").children().not(".overlay").css("outline-style", "none");
-    $("#lines")
-      .text("Lines: OFF")
-      .css({ "background-color": "transparent", color: "black" });
-  } else {
-    $(".container").children().not(".overlay").css("outline-style", "solid");
-    $("#lines")
-      .text("Lines:  ON")
-      .css({ "background-color": "black", color: "white" });
-  }
-  gridLines = !gridLines;
 });
 
 $("#reset").click(() => {
